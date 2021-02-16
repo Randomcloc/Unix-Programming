@@ -9,6 +9,11 @@
  * The -e flag will print the first n even lines from the file.
  * The -h flag prints all the options/flags available for the user.
  * the -V flag prints my name, email, and student number in the terminal.
+ * The program can take in standard input and print the lines that should be printed, but it does so after immidiately receiving a line.
+ * -----
+ * What works:
+ * If a file is given, the program works perfectly. If a -n value that is larger than the lines that can be retreived, the program prints the entire file.
+ * The program can only be stopped by manual termination if standard input is being taken (Ctrl + c).
  * -----
  */
 #include <stdio.h>
@@ -24,8 +29,6 @@ int main(int argc, char *argv[]) {
 	int nvalue = 10;
 	/* This stores the return value from the getopt() function.*/
 	int opt;
-	/* Stores the character value of the number which is followed by the -n flag.*/
-	char num;
 
 	// This loop sets the variables/prints the required strings to the terminal based on the flags the user inputs.
 	while ((opt = getopt(argc, argv, "n:eVh")) != -1) {
@@ -52,7 +55,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-    FILE *fp;
+	FILE *fp;
 	size_t len; 
 	char *line = NULL;
 	ssize_t read;
@@ -64,9 +67,7 @@ int main(int argc, char *argv[]) {
 	fp = fopen(argv[argc - 1], "r");
 	
 	if (fp == NULL) {
-
-		printf("error\n");
-		exit(EXIT_FAILURE);	
+		fp = stdin;	
 	}
 
 	while ((read = getline(&line, &len, fp)) != -1) { 
