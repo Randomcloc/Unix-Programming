@@ -25,8 +25,9 @@
 
 int main(int argc, char *argv[]) {
 
-	/* A boolean value which tells us if the even flag was used or not.*/
+	/* A boolean value which tells us if the even/odd flag was used or not.*/
 	bool evenflag = false;
+	bool oddflag = false;
 	/* The value of the number of lines to be printed (10 by default).*/
 	int nvalue = 10;
 	/* This stores the return value from the getopt() function.*/
@@ -42,7 +43,7 @@ int main(int argc, char *argv[]) {
 	int i = 1;
 
 	// This loop sets the variables/prints the required strings to the terminal based on the flags the user inputs.
-	while ((opt = getopt(argc, argv, "n:eVh")) != -1) {
+	while ((opt = getopt(argc, argv, "n:eoVh")) != -1) {
 		
 		switch (opt)
     	{	
@@ -53,6 +54,9 @@ int main(int argc, char *argv[]) {
 			case 'e':
 				evenflag = true;		/* We set the evenflag value to true since the -e flag would be used by the user. */
 				break;
+			case 'o':
+				oddflag = true;
+				break;
 			case 'V':
 				printf("Name: Abhijeet Suryawanshi\nEmail: abhijeet.suryawanshi@ucdconnect.ie\nStudent Number: 19370773\n");
 				return 0;
@@ -61,7 +65,8 @@ int main(int argc, char *argv[]) {
 				-n K output the first|last K lines.\n\
 				-V Output version info: Your name, email, student number.\n\
 				-h display all options ( something like this ) and exit.\n\
-				-e print even lines.\n");
+				-e print even lines.\n\
+				-o print odd lines.\n");
 				return 0;
 		}
 	}
@@ -77,22 +82,19 @@ int main(int argc, char *argv[]) {
 
 	while ((read = getline(&line, &len, fp)) != -1) { 
 		
-		//If the even flag was used, only print the even lines 
-		if (evenflag) {
-
-			if (i % 2 == 0 && printCount < nvalue) {
-				printf("%d. %s", i, line);
-				printCount++;
-			}
+		if (i % 2 == 0 && printCount < nvalue && evenflag) {
+			printf("%d. %s", i, line);
+			printCount++;
+		}
 			
-			i++;
+		else if (i % 2 != 0 && printCount < nvalue && oddflag) {
+			printf("%d. %s", i, line);
+			printCount++;
 		}
-		else {
 
-			if (i <= nvalue)
-				printf("%d. %s", i, line); 
-			i++; 
-		}
+		else if (i <= nvalue && evenflag == oddflag) 
+			printf("%d. %s", i, line); 
+		i++;		
 	}
 
 	free(line);	
