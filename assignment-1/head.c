@@ -11,15 +11,17 @@
  * the -V flag prints my name, email, and student number in the terminal.
  * The program can take in standard input and print the lines that should be printed, but it does so after immidiately receiving a line.
  * -----
- * What works:
- * If a file is given, the program works perfectly. If a -n value that is larger than the lines that can be retreived, the program prints the entire file.
+ * Progress:
+ * If a file is given, the program works perfectly. If there is a -n value that is larger than the lines that can be retreived, the program prints the entire file.
  * The program can only be stopped by manual termination if standard input is being taken (Ctrl + c).
+ * If standard input is taken, the program will output to standard output as the lines are being typed into stdin.
  * -----
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
 #include <stdbool.h>
+#include <string.h>
 
 int main(int argc, char *argv[]) {
 
@@ -29,6 +31,15 @@ int main(int argc, char *argv[]) {
 	int nvalue = 10;
 	/* This stores the return value from the getopt() function.*/
 	int opt;
+
+	FILE *fp;
+	size_t len; 
+	char *line = NULL;
+	ssize_t read;
+	/* This counter will be used to count the number of lines already printed to the terminal. */
+	int printCount = 0;
+	/* The counter that will be used to check the line at which the file is reading.*/
+	int i = 1;
 
 	// This loop sets the variables/prints the required strings to the terminal based on the flags the user inputs.
 	while ((opt = getopt(argc, argv, "n:eVh")) != -1) {
@@ -43,7 +54,7 @@ int main(int argc, char *argv[]) {
 				evenflag = true;		/* We set the evenflag value to true since the -e flag would be used by the user. */
 				break;
 			case 'V':
-				printf("Name: Abhijeet Suryawanshi\nEmail: abhijeet.suryawanshi@ucdconnect.ie\nStudent Number: 19370773");
+				printf("Name: Abhijeet Suryawanshi\nEmail: abhijeet.suryawanshi@ucdconnect.ie\nStudent Number: 19370773\n");
 				return 0;
 			case 'h':
 				printf("Options:\n\
@@ -54,19 +65,13 @@ int main(int argc, char *argv[]) {
 				return 0;
 		}
 	}
-
-	FILE *fp;
-	size_t len; 
-	char *line = NULL;
-	ssize_t read;
-	/* This counter will be used to count the number of lines already printed to the terminal. */
-	int printCount = 0;
-	/* The counter that will be used to check the line at which the file is reading.*/
-	int i = 1;
 	
 	fp = fopen(argv[argc - 1], "r");
 	
-	if (fp == NULL) {
+	if (fp == NULL || strcmp(argv[argc - 1], "./head") == 0) {
+
+		//If no file, or a non-existent file is given, standard input will be taken in.
+		printf("Error opening file: Input from user will be taken, press (Crtl + c) to exit.\n");
 		fp = stdin;	
 	}
 
@@ -74,16 +79,18 @@ int main(int argc, char *argv[]) {
 		
 		//If the even flag was used, only print the even lines 
 		if (evenflag) {
-			if (i % 2 == 0 && printCount <= nvalue) {
-				printf("%s", line);
+
+			if (i % 2 == 0 && printCount < nvalue) {
+				printf("%d. %s", i, line);
 				printCount++;
 			}
 			
 			i++;
 		}
 		else {
+
 			if (i <= nvalue)
-				printf("%s", line); 
+				printf("%d. %s", i, line); 
 			i++; 
 		}
 	}
