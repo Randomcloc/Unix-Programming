@@ -5,33 +5,7 @@
  * -----
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-struct Point
-{
-    double x;
-    double y;
-} Point;
-
-double rectangle_area(struct Point a, struct Point b)
-{
-    // a and b are (x,y) cordinates of
-    // opposite corners of a rectangle.
-    // Return the area of the rectangle.
-    double x_diff, y_diff;
-    
-    x_diff = fabs(a.x - b.x);
-    y_diff = fabs(a.y - b.y);
-
-    return x_diff * y_diff;
-}
-
-double compute_cost(double area, double cost)
-{
-    return cost * area;
-}
+#include "rectangle.h"
 
 int main(int argc, char *argv[])
 {
@@ -44,8 +18,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    struct Point P1;
-    struct Point P2;
+    Point P1;
+    Point P2;
     P1.x = atof(argv[1]);
     P1.y = atof(argv[2]);
     P2.x = atof(argv[3]);
