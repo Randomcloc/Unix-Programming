@@ -4,15 +4,15 @@
  * Email: abhijeet.suryawanshi@ucdconnect.ie
  * -----
  * Explanation: 
- * This code has the head functionality inplemented which gets the first 10 lines of a given file for input (if the -n flag is not present).
+ * This code has the head functionality implemented which gets the first 10 lines of a given file for input (if the -n flag is not present).
  * The user can specify how many lines they want to be printed to the terminal with the -n flag followed by the desired number.
  * The -e flag will print the first n even lines from the file.
  * The -h flag prints all the options/flags available for the user.
  * the -V flag prints my name, email, and student number in the terminal.
- * The program can take in standard input and print the lines that should be printed, but it does so after immidiately receiving a line.
+ * The program can take in standard input and print the lines that should be printed, but it does so after immediately receiving a line.
  * -----
  * Progress:
- * If a file is given, the program works perfectly. If there is a -n value that is larger than the lines that can be retreived, the program prints the entire file.
+ * If a file is given, the program works perfectly. If there is a -n value that is larger than the lines that can be retrieved, the program prints the entire file.
  * The program can only be stopped by manual termination if standard input is being taken (Ctrl + c).
  * If standard input is taken, the program will output to standard output as the lines are being typed into stdin.
  * -----
