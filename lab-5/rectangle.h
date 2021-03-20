@@ -7,7 +7,7 @@
  * Student Number: 19370773
  * -----
  * Modified By: Abhijeet Suryawanshi
- * Date Modified: Thursday, 18th February 2021 6:14 pm
+ * Date Modified: Friday, 19th February 2021 10:32 am
  */
 
 #ifndef RECTANGLE_H
@@ -25,6 +25,5 @@ typedef struct Point
 
 double rectangle_area(struct Point a, struct Point b);
 double compute_cost(double area, double cost);
-
 
 #endif
