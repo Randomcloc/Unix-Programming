@@ -1,13 +1,9 @@
 /*
- * File: main.c
- * Project: assignment-2
- * Created Date: Friday, 19th March 2021 3:43:30 pm
  * -----
  * Code by: Abhijeet Suryawanshi
  * Student Number: 19370773
+ * Email: abhijeet.suryawanshi@ucdconnect.ie
  * -----
- * Modified By: Abhijeet Suryawanshi
- * Date Modified: Saturday, 20th March 2021 6:38 pm
  */
 #include <stdio.h>
 #include <stdlib.h>
