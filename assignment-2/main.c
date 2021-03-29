@@ -44,5 +44,4 @@ int main()
 }
 
 /* Function to pass into the signal() call. */
-void signalhandler(int signum) {
-}
+void signalhandler(int signum) {}
