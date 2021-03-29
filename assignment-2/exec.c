@@ -1,20 +1,11 @@
 /*
- * File: exec.c
- * Project: assignment-2
- * Created Date: Friday, 19th March 2021 5:30:01 pm
  * -----
  * Code by: Abhijeet Suryawanshi
  * Student Number: 19370773
+ * Email: abhijeet.suryawanshi@ucdconnect.ie
  * -----
- * Modified By: Abhijeet Suryawanshi
- * Date Modified: Saturday, 20th March 2021 6:30 pm
  */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include "cd.h"
+#include "exec.h"
 
 // This is the function that replaces system() call in main. Has features 1 and 5.
 void exec(char *input)
@@ -93,6 +84,7 @@ void exec(char *input)
     {
         /* We are the child */
         execvp(argv[0], argv);
+        printf("Command not found: %s\n", argv[0]);
         /* execvp() only returns if there is an error. */
         exit(EXIT_FAILURE);
     }
@@ -108,6 +100,6 @@ void exec(char *input)
     {
         close(f);
     }
-
+ 
     return;
 }
